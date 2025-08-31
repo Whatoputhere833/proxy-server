@@ -1,0 +1,17 @@
+# Node modules (massive folder, don't commit)
+node_modules/
+
+# Environment variables (contains secrets)
+.env
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Optional: VS Code settings
+.vscode/
