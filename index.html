@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Echo Tunnel</title>
+  <style>
+    body {
+      background: black;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      padding: 2rem;
+    }
+    h1 {
+      text-shadow: 0 0 5px #00ffcc;
+    }
+    input, button {
+      background: transparent;
+      border: 1px solid #00ffcc;
+      color: #00ffcc;
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+    #output {
+      margin-top: 2rem;
+      white-space: pre-wrap;
+      background: #111;
+      padding: 1rem;
+      border: 1px solid #00ffcc;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌀 Echo Tunnel Proxy</h1>
+  <p>Enter an endpoint (e.g. <code>/posts</code>)</p>
+  <input id="endpoint" placeholder="/posts" />
+  <button onclick="fetchProxy()">Transmit</button>
+  <div id="output">Awaiting signal...</div>
+
+  <script>
+    async function fetchProxy() {
+      const endpoint = document.getElementById('endpoint').value;
+      const output = document.getElementById('output');
+      output.textContent = 'Transmitting...';
+
+      try {
+        const res = await fetch(`/api${endpoint}`);
+        const data = await res.json();
+        output.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        output.textContent = '⚠️ Signal lost. Error: ' + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
